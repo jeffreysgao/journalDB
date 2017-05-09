@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
+	private Person currentUser;
   public UI() throws IOException {}
 
 

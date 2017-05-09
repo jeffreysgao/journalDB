@@ -89,5 +89,9 @@ public class Verb {
 
 		return "Hello";
 	}
+
+	public static void verbLogin(){
+		
+	}
 }
 
