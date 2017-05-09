@@ -25,7 +25,6 @@ public class People {
 				return id;
 			}
 		}
-		
 		return -1;
 	}
 	
