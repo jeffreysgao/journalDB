@@ -2,7 +2,6 @@ package journalDB;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import static Verb;
 
 public class UI {
   public UI() throws IOException {}
@@ -17,7 +16,7 @@ public class UI {
         break;
 
       case "login" :
-    	 Verb.verbLogin(input);
+    	Verb.verbLogin(input);
         break;
 
       case "status" :

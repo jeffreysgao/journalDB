@@ -2,7 +2,7 @@ package journalDB;
 
 import java.util.ArrayList;
 
-public class people {
+public class People {
 	public static final int AUTHOR = 0;
 	public static final int EDITOR = 1; 
 	public static final int REVIEWER = 2;
@@ -17,7 +17,7 @@ public class people {
 			if (affil != null && !affil.isEmpty()) 
 				rQuery += String.format(", %1", affil);
 			rQuery += ");";
-			if (query.insert(rQuery) > 0) {
+			if (Query.insert(rQuery) > 0) {
 				for (int ricode : ricodes) {
 					// query to insert ricodes
 				}
@@ -39,7 +39,7 @@ public class people {
 			if (affil != null && !affil.isEmpty()) 
 				aQuery += String.format(", \"%1$s\"", affil);
 			aQuery += ");";
-			if (query.insert(aQuery) > 0)
+			if (Query.insert(aQuery) > 0)
 				return id;
 		} 
 		return -1;
@@ -70,6 +70,6 @@ public class people {
 				return -1;
 		} 
 		
-		return query.insert(pQuery);
+		return Query.insert(pQuery);
 	}
 }
