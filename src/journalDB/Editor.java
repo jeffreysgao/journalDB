@@ -14,6 +14,7 @@ public class Editor extends Person{
 	public void assing(ArrayList<String> input){
 		
 	}
+	
 	public void assign(int manuNum){
 		
 	}

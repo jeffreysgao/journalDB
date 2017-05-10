@@ -15,7 +15,6 @@ public class Author extends Person {
 		//manuscripts currently in the system where 
 		//they are the primary author
 		System.out.println("Author status");
-		
 	}
 	
 	public void submit(ArrayList<String> input){
