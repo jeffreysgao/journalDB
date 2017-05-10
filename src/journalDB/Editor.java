@@ -84,7 +84,7 @@ public class Editor extends Person{
 		}
 		
 		// Check if manuscript has been scheduled already 
-		String existsQuery = String.format("SELECT COUNT(*) FROM Scheduling WHERE Manuscript_MAN_ID = %1$s", manuNum);
+		String existsQuery = String.format("SELECT COUNT(*) FROM Scheduling WHERE Manuscript_MAN_ID = %1$s;", manuNum);
 		results = Query.execute(existsQuery);
 		if (results != null && results.size() == 2 && results.get(0).size() == 1) {
 			if (results.get(0).get(0).equals("COUNT(*)")) {
@@ -101,7 +101,7 @@ public class Editor extends Person{
 				
 		// Get the manuscript num pages
 		int numPages = 0;
-		String mQuery = String.format("SELECT MAN_NUMPAGES FROM Manuscript WHERE MAN_ID = %1$s", manuNum);
+		String mQuery = String.format("SELECT MAN_NUMPAGES FROM Manuscript WHERE MAN_ID = %1$s;", manuNum);
 		results = Query.execute(mQuery);
 		if (results != null && results.size() == 2 && results.get(1).size() == 1)
 			numPages = Integer.parseInt(results.get(1).get(0));
@@ -109,7 +109,7 @@ public class Editor extends Person{
 		// Get the current page number
 		int pageNo = 0;
 		int order = 0;
-		String pQuery = String.format("SELECT PAGENO, ORDERING FROM Scheduling WHERE Issue_ISS_ID = %1$s", issue);
+		String pQuery = String.format("SELECT PAGENO, ORDERING FROM Scheduling WHERE Issue_ISS_ID = %1$s;", issue);
 		results = Query.execute(pQuery);
 		if (results != null && results.size() > 1 && results.get(0).size() == 2 && results.get(0).get(0).equals("PAGENO") 
 				&& results.get(0).get(1).equals("ORDERING")) {
@@ -137,17 +137,33 @@ public class Editor extends Person{
 				+ " VALUES (%1$s, %2$s, %3$s, %4$s);", issue, manuNum, pageNo, order);
 		
 		return Query.insert(sQuery) >= 0;
-//		if (Query.insert(sQuery) >= 0) {
-//			// Update manuscript status
-//			String statusQuery = String.format("UPDATE Manuscript SET MAN_STATUS = 4, MAN_LASTUPDATED = NOW() WHERE MAN_ID = %1$s;", manuNum);
-//			return Query.insert(statusQuery) >= 0;
-//		}
-//		
-//		return false;
 	}
 	
-	public void publish(int issue){
+	public boolean publish(int issue){
+		// Get all manuscripts for the issue
+		ArrayList<Integer> manIds = new ArrayList<Integer>();
+		String schedQuery = String.format("SELECT Manuscript_MAN_ID FROM Scheduling WHERE Issue_ISS_ID = %1$s;", issue);
+		ArrayList<ArrayList<String>> results = Query.execute(schedQuery);
+		if (results != null && results.size() > 1 && results.get(0).size() == 1) {
+			if (results.get(0).get(0).equals("Manuscript_MAN_ID")) {
+				for (int i = 1; i < results.size(); i++) 
+					manIds.add(Integer.parseInt(results.get(i).get(0)));
+			} else {
+				System.out.println("Error in retrieving manuscripts scheduled to issue");
+				return false;
+			}
+		} else {
+			System.out.println("Error in retrieving manuscripts scheduled to issue");
+			return false;
+		}
 		
+		for (int manuNum : manIds) {
+			String statusQuery = String.format("UPDATE Manuscript SET MAN_STATUS = 4, MAN_LASTUPDATED = NOW() WHERE MAN_ID = %1$s;", manuNum);
+			if (Query.insert(statusQuery) < 0)
+				System.out.println("Error in updating status of manuscript " + manuNum);
+		}
+		
+		return true;
 	}
 	
 	// Helper method to check if statuses are in a given set 
