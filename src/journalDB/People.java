@@ -8,18 +8,26 @@ public class People {
 	public static final int REVIEWER = 2;
 
 	public static long regReviewer(String fname, String lname, String mname, String affil, String email, ArrayList<Integer> ricodes) {
+		if (fname == null || fname.isEmpty() || lname == null || lname.isEmpty() || email == null || email.isEmpty())
+			return -1;
+		
+		if (ricodes.size() == 0 || ricodes.size() > 3)
+			return -1;
+		
 		long id = regPerson(fname, lname, mname, REVIEWER);
 		if (id > 0) {
 			String rQuery = "INSERT INTO Reviewer (Person_PERSON_ID, REV_EMAIL, REV_ISACTIVE";
 			if (affil != null && !affil.isEmpty())
 				rQuery += ", REV_AFFIL";
-			rQuery += String.format(") VALUES (%1, %2, true", id, email);
+			rQuery += String.format(") VALUES (\"%1$s\", \"%2$s\", true", id, email);
 			if (affil != null && !affil.isEmpty())
-				rQuery += String.format(", %1", affil);
+				rQuery += String.format(", \"%1$s\"", affil);
 			rQuery += ");";
-			if (Query.insert(rQuery) > 0) {
+			if (Query.insert(rQuery) >= 0) {
 				for (int ricode : ricodes) {
-					// query to insert ricodes
+					String rcQuery = String.format("INSERT INTO Interests (Reviewer_Person_PERSON_ID, Area_AREA_ID) VALUES (%1$s, %2$s);", id, ricode);
+					if (Query.insert(rcQuery) < 0)
+						System.out.println("Inserting " + ricode + " for " + id + " into ricodes failed");
 				}
 
 				return id;
@@ -69,6 +77,8 @@ public class People {
 				return -1;
 		}
 
+		pQuery += ");";
+		System.out.println(pQuery);
 		return Query.insert(pQuery);
 	}
 }
