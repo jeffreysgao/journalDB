@@ -144,15 +144,17 @@ public class Editor extends Person{
 		int order = 0;
 		String pQuery = String.format("SELECT PAGENO, ORDERING FROM Scheduling WHERE Issue_ISS_ID = %1$s;", issue);
 		results = Query.execute(pQuery);
-		if (results != null && results.size() > 1 && results.get(0).size() == 2 && results.get(0).get(0).equals("PAGENO")
+		if (results != null && results.size() >= 1 && results.get(0).size() == 2 && results.get(0).get(0).equals("PAGENO")
 				&& results.get(0).get(1).equals("ORDERING")) {
 			int maxOrder = 0;
 			int maxPageNo = 0;
-			for (int i = 1; i < results.size(); i++) {
-				ArrayList<String> row = results.get(i);
-				maxPageNo = Math.max(maxPageNo, Integer.parseInt(row.get(0)));
-				maxOrder = Math.max(maxOrder, Integer.parseInt(row.get(1)));
-			}
+			 if (results.size() > 1) {
+				 for (int i = 1; i < results.size(); i++) {
+						ArrayList<String> row = results.get(i);
+						maxPageNo = Math.max(maxPageNo, Integer.parseInt(row.get(0)));
+						maxOrder = Math.max(maxOrder, Integer.parseInt(row.get(1)));
+					}
+			 }
 
 			pageNo = maxPageNo + 1;
 			order = maxOrder + 1;
