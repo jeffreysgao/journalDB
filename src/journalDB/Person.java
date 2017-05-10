@@ -35,6 +35,7 @@ public class Person {
 	
 	//reviewer verbs
 	public void resign(ArrayList<String> input){ warning("resign");}
+	public void review(Boolean isAccepted, ArrayList<String> input){ warning("review"); }
 
 	
 	public String getClassName(){

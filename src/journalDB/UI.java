@@ -101,29 +101,13 @@ public class UI {
   public static void main (String[] args) throws IOException{
     Scanner scan = new Scanner(System.in);
     String singleInput = scan.nextLine();
-
     System.out.println(singleInput);
-    int i = Integer.parseInt("1");
-    System.out.println(i);
-    int a =0, b =0, c= 0, d = 0;
-    int sum = 0;
-    try {
-    	ArrayList<Integer> jon = new ArrayList<Integer>();
-    	jon.add(1);
-    	jon.add(2);
-    	jon.add(3);
-    	sum = sum + jon.get(0);
-    	sum = sum + jon.get(1);
-    	sum = sum + jon.get(2);
-    	sum = sum +jon.get(3);
 
-    } catch( Exception e){
 
-    	System.out.println("haha");
-    	System.out.println(sum);
-
-    }
     ArrayList<String> input = new ArrayList<String>(Arrays.asList(singleInput.split(" ")));
+    Person yo = new Reviewer(8);
+
+    yo.review(true, input);
 
     //routeVerbs(input);
     
