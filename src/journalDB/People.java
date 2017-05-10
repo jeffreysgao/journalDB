@@ -19,7 +19,7 @@ public class People {
 			rQuery += ");";
 			if (Query.insert(rQuery) > 0) {
 				for (int ricode : ricodes) {
-					// query to insert ricodes
+					// query to insert ricodes into Interest table
 				}
 
 				return id;
