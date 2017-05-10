@@ -1,7 +1,12 @@
 # journalDB
 # journalDB
 
+-1 means insert failed
+0 means successful no new key created
+1 or greater is the key
 
+# SAM TODO
+implement are you sure interface in retract.authro
 
 # TODO Functions
 

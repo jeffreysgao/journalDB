@@ -17,5 +17,12 @@ public class Validation {
 		return (arrayList.size() >= size);
 	}
 	
+	public static Boolean validateRatings(int appr, int clar, int meth, int contr){
+		return (isRating(appr) && isRating(clar) && isRating(meth) && isRating(contr));
+	}
+	
+	private static Boolean isRating(int i) { 
+		 return (i <= 10 && i >= 1);
+	}
 
 }

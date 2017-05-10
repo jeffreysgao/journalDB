@@ -62,7 +62,6 @@ public class UI {
 	  		break;
 
 	  	case "submit" :
-	  		//submit <title> <Affiliation> <RICode> <author2> <author3> <author4> <filename>
 	  		currentUser.submit(input);
 	  		break;
 
@@ -93,8 +92,6 @@ public class UI {
 	  		currentUser.resign(input);
 	  		break;
 
-	  		
-
 	  	default:
 	  		System.out.println("Please choose a valid command");
 	  }
@@ -106,9 +103,20 @@ public class UI {
     String singleInput = scan.nextLine();
 
     System.out.println(singleInput);
+    int i = Integer.parseInt("1");
+    System.out.println(i);
+    try {
+    	ArrayList<Integer> jon = new ArrayList<Integer>();
+    	jon.add(1);
+    	int x = Integer.parseInt("fsdfa");
+        int j = jon.get(1);
+
+    } catch( Exception e){
+    	System.out.println("haha");
+    }
     ArrayList<String> input = new ArrayList<String>(Arrays.asList(singleInput.split(" ")));
 
-    routeVerbs(input);
+    //routeVerbs(input);
     
 
 
