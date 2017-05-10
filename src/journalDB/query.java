@@ -3,7 +3,7 @@ package journalDB;
 import java.math.BigInteger;
 import java.sql.*;
 
-public class query {
+public class Query {
 	
 	public static final String SERVER   = "jdbc:mysql://sunapee.cs.dartmouth.edu/";
     public static final String USERNAME = "gbsnlspl";
