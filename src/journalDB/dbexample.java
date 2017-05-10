@@ -29,11 +29,17 @@ public class dbexample {
 //		  System.out.println();
 //	  }
 	  
-	  ArrayList<Integer> ricodes = new ArrayList<Integer>();
-	  ricodes.add(1);
-	  ricodes.add(2);
-	  ricodes.add(3);
-	  long id = People.regReviewer("jeff", "gao", null, "Dartmouth College", "jeffrey.s.gao", ricodes);
-	  System.out.println(Long.toString(id));
+//	  ArrayList<Integer> ricodes = new ArrayList<Integer>();
+//	  ricodes.add(1);
+//	  ricodes.add(2);
+//	  ricodes.add(3);
+//	  long id = People.regReviewer("jeff", "gao", null, "Dartmouth College", "jeffrey.s.gao", ricodes);
+//	  System.out.println(Long.toString(id));
+	  
+	  Editor jameson = new Editor(50);
+	  if (jameson.assign(3, 38))
+		  System.out.println("success");
+	  else
+		  System.out.println("fail");
   }
 }
