@@ -12,7 +12,11 @@ public class Editor extends Person{
 	}
 	
 	public void assign(ArrayList<String> input){
-		
+		if (Validation.validateDoubleIntegers(input)){
+			assign(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(2)));
+		} else { 
+			System.out.println("Please provide two options <manu#> and <reviewerId> such that they are both integers");
+		}
 	}
 	
 	public boolean assign(int manuNum, int revId){
@@ -42,22 +46,57 @@ public class Editor extends Person{
 		return Query.insert(assnQuery) >= 0;
 	}
 	
+	public void reject(ArrayList<String> input){
+		if (Validation.validateSingleInteger(input)) { 
+			reject(Integer.parseInt(input.get(0)));
+		} else {
+			System.out.println("Please provide valid integer arugment");
+		}
+	}
 	public void reject(int manuNum){
 		
 	}
 	
+	public void accept(ArrayList<String> input){
+		if (Validation.validateSingleInteger(input)){
+			accept(Integer.parseInt(input.get(0)));
+		} else {
+			System.out.println("Please provide valid integer arugment");
+		}
+	}
 	public void accept(int manuNum){
 		
 	}
 	
+	public void typeset(ArrayList<String> input){
+		if (Validation.validateDoubleIntegers(input)){
+			typeset(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)));
+		} else {
+			System.out.println("Please provide a valid integer <manu#> and number of page");
+		}
+	}
 	public void typeset(int manuNum, int numPages){
 		
 	}
 	
+	public void schedule(ArrayList<String> input){
+		if (Validation.validateDoubleIntegers(input)){
+			typeset(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)));
+		} else {
+			System.out.println("Please provide a valid integer <manu#> and issue number");
+		}
+	}
 	public void schedule(int manuNum, int issue){
 		
 	}
 	
+	public void publish(ArrayList<String> input){
+		if (Validation.validateDoubleIntegers(input)){
+			publish(Integer.parseInt(input.get(0)));
+		} else { 
+			System.out.println("Please provide a valid integer issue number");
+		}
+	}
 	public void publish(int issue){
 		
 	}
