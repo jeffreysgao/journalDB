@@ -3,7 +3,7 @@ package journalDB;
 import java.util.ArrayList;
 
 public class Person { 
-	private int id;
+	protected int id;
 	private String className;
 	public Person(int id, String className){
 		this.id = id;
