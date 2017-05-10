@@ -24,5 +24,32 @@ public class Validation {
 	private static Boolean isRating(int i) { 
 		 return (i <= 10 && i >= 1);
 	}
+	
+	public static Boolean validateSingleInteger(ArrayList<String> item){
+		if (validateLength(item, 1)){
+			try {
+				Integer.parseInt(item.get(0));
+				return true;
+			} catch(Exception e ) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	public static Boolean validateDoubleIntegers(ArrayList<String> item){
+		if (validateLength(item, 2)){
+			try {
+				Integer.parseInt(item.get(0));
+				Integer.parseInt(item.get(1));
+				return true;
+			} catch(Exception e) { 
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 }
