@@ -73,13 +73,16 @@ public class Query {
 
     /*
      * Used for queries that update tables, true indicates successfully changing 1+ rows
+     * Returns 1+ if new key is created 
+     * Returns 0 if successful but no new key created
+     * Returns -1 if unsuccessful
      */
     public static int insert(String q) {
     	Connection con = null;
     	Statement stmt = null;
     	int res = 0;
     	int numColumns = 0;
-    	int id = -1;
+    	int id = 0;
 
     	// attempt to connect to db
     	try {
@@ -101,8 +104,10 @@ public class Query {
     	    if (rs.next())
     	    	id = rs.getInt(1);
     	    rs.close();
+    	    
+    	    System.out.println(Integer.toString(id));
 
-    	    System.out.format("Query executed: '%s'\n\nResults:\n", q);
+    	    System.out.format("Query executed: '%s'\n", q);
 
     	} catch (SQLException e ) {          // catch SQL errors
     	    System.err.format("SQL Error: %s", e.getMessage());
