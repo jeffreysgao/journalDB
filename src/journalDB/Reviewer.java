@@ -3,8 +3,6 @@ package journalDB;
 import java.util.ArrayList;
 
 public class Reviewer extends Person {
-
-	
 	public Reviewer(int id){
 		super(id, "reviewer");
 		status();
