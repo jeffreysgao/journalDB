@@ -1,4 +1,7 @@
 package journalDB;
+
+import java.util.ArrayList;
+
 public class Editor extends Person{
 	public Editor(int id){
 		super(id, "editor");
@@ -8,6 +11,9 @@ public class Editor extends Person{
 		System.out.println("Editor status");
 	}
 	
+	public void assing(ArrayList<String> input){
+		
+	}
 	public void assign(int manuNum){
 		
 	}

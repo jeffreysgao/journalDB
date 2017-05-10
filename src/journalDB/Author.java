@@ -46,15 +46,8 @@ public class Author extends Person {
 			}
 	}
 	
-	public void submit(String title, String affil, int RICode, String secondaryAuthors, String filename){
-		
+
+	public void retract(ArrayList<String> input){
+		//are you sure interface
 	}
-	
-	
-	public void retract(input){
-		
-		//are you sure? interface
-		
-	}
-	
 }

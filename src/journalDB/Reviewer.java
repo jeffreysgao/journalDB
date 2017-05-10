@@ -12,7 +12,7 @@ public class Reviewer extends Person {
 		System.out.println("Reviewer status");
 	}
 	public void resign(){
-		
+		//remove themselves
 	}
 	
 
@@ -21,4 +21,6 @@ public class Reviewer extends Person {
 		//set values for clar, appr, method, contr, etc
 		//must check to see that that the manuscript is in the reviewing phase
 	}
+	
+	
 }
