@@ -23,22 +23,22 @@ public class Author extends Person {
 		switch(input.size()) {
 			case (4) : 
 				RICode = Integer.parseInt(input.get(2));
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(3));
+//				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(3));
 				break;
 			case(5) : 
 				RICode = Integer.parseInt(input.get(2));
 				secondaryAuthors = input.get(3);
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(4));
+//				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(4));
 				break;
 			case(6) : 
 				RICode = Integer.parseInt(input.get(2));
 				secondaryAuthors = input.get(3) + input.get(4);
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(5));
+//				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(5));
 				break;
 			case(7) : 
 				RICode = Integer.parseInt(input.get(2));
 				secondaryAuthors = input.get(3) + input.get(4) + input.get(5);
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(6));
+//				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(6));
 				break;
 			default : 
 				System.out.println("Please enter the proper number of arguments");

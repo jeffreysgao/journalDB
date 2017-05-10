@@ -16,7 +16,7 @@ public class dbexample {
   public static final String QUERY    = "SELECT * FROM manuscript;";
 
   public static void main(String[] args) {
-	long id = people.regAuthor("jeff", "gao", "shung", "jeffrey.s.gao", "13517 Moonflower Meadows Trail", "Dartmouth College");
+	long id = People.regAuthor("jeff", "gao", "shung", "jeffrey.s.gao", "13517 Moonflower Meadows Trail", "Dartmouth College");
 	System.out.println(Long.toString(id));
   }
 }
