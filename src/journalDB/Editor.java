@@ -11,6 +11,7 @@ public class Editor extends Person{
 		System.out.println("Editor status");
 	}
 
+	// Assign
 	public void assign(ArrayList<String> input){
 		if (Validation.validateDoubleIntegers(input)){
 			assign(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(2)));
@@ -31,6 +32,7 @@ public class Editor extends Person{
 		return Query.insert(assnQuery) >= 0;
 	}
 
+	// Reject
 	public void reject(ArrayList<String> input){
 		if (Validation.validateSingleInteger(input)) {
 			reject(Integer.parseInt(input.get(0)));
@@ -38,6 +40,7 @@ public class Editor extends Person{
 			System.out.println("Please provide valid integer arugment");
 		}
 	}
+
 	public boolean reject(int manuNum){
 		// Check if manuscript is rejectable
 		int[] statuses = {0, 2};
@@ -49,6 +52,7 @@ public class Editor extends Person{
 		return Query.insert(rQuery) >= 0;
 	}
 
+	// Accept
 	public void accept(ArrayList<String> input){
 		if (Validation.validateSingleInteger(input)){
 			accept(Integer.parseInt(input.get(0)));
@@ -56,6 +60,7 @@ public class Editor extends Person{
 			System.out.println("Please provide valid integer arugment");
 		}
 	}
+
 	public boolean accept(int manuNum){
 		// Check if manuscript is acceptable
 		int[] statuses = {2};
@@ -67,6 +72,7 @@ public class Editor extends Person{
 		return Query.insert(accQuery) >= 0;
 	}
 
+	// Typeset
 	public void typeset(ArrayList<String> input){
 		if (Validation.validateDoubleIntegers(input)){
 			typeset(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)));
@@ -74,6 +80,7 @@ public class Editor extends Person{
 			System.out.println("Please provide a valid integer <manu#> and number of page");
 		}
 	}
+
 	public boolean typeset(int manuNum, int numPages){
 		// Check if manuscript is typesettable
 		int[] statuses = {3};
@@ -85,6 +92,7 @@ public class Editor extends Person{
 		return Query.insert(tQuery) >= 0;
 	}
 
+	// Schedule
 	public void schedule(ArrayList<String> input){
 		if (Validation.validateDoubleIntegers(input)){
 			typeset(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)));
@@ -92,6 +100,7 @@ public class Editor extends Person{
 			System.out.println("Please provide a valid integer <manu#> and issue number");
 		}
 	}
+
 	public boolean schedule(int manuNum, int issue){
 		// Check if manuscript is schedulable
 		int[] statuses = {3};
@@ -104,7 +113,6 @@ public class Editor extends Person{
 		ArrayList<ArrayList<String>> results = Query.execute(iQuery);
 		if (results != null && results.size() == 2 && results.get(0).size() == 1) {
 			if (results.get(0).get(0).equals("COUNT(*)")) {
-				System.out.println(Integer.parseInt(results.get(1).get(0)));
 				if (Integer.parseInt(results.get(1).get(0)) != 1) {
 					System.out.println("Can't find issue " + issue);
 					return false;
@@ -121,7 +129,6 @@ public class Editor extends Person{
 		results = Query.execute(existsQuery);
 		if (results != null && results.size() == 2 && results.get(0).size() == 1) {
 			if (results.get(0).get(0).equals("COUNT(*)")) {
-				System.out.println(Integer.parseInt(results.get(1).get(0)));
 				if (Integer.parseInt(results.get(1).get(0)) > 0) {
 					System.out.println("Manuscript has already been scheduled");
 					return false;
@@ -174,6 +181,7 @@ public class Editor extends Person{
 		return Query.insert(sQuery) >= 0;
 	}
 	
+	// Publish
 	public boolean publish(int issue){
 		// Get all manuscripts for the issue
 		ArrayList<Integer> manIds = new ArrayList<Integer>();

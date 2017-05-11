@@ -77,7 +77,6 @@ public class People {
 				return -1;
 		}
 
-		System.out.println(pQuery);
 		return Query.insert(pQuery);
 	}
 }
