@@ -30,13 +30,16 @@ public class Reviewer extends Person {
 				System.out.println("Ratings can only be between 1-10");
 			}
 		} catch(Exception e ){
+			System.out.println(input);
 			System.out.println("Please give proper type and number of arguments");
 		}
 	}
 
 	private void review(Boolean isAccepted, int manId, int appr, int clar, int meth, int contr){	
+		int intAccepted = isAccepted ? 1 : 0;
 		String query = "INSERT INTO Rating (Assignment_Reviewer_Person_PERSON_ID, Assignment_Manuscript_MAN_ID, RATING_APPR, RATING_CLAR, RATING_METH, RATING_CONTR, RATING_REC) " + 
-				"VALUES (" + this.id + ", " + manId + ", " + appr + ", " + clar + ", " + meth + ", " + contr + ")";
+				"VALUES (" + this.id + ", " + manId + ", " + appr + ", " + clar + ", " + meth + ", " + contr + ", " + intAccepted +");";
+		System.out.println(query);
 		Query.insert(query);
 	}	
 }
