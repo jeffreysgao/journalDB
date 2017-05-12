@@ -89,8 +89,20 @@ public class BlandVerb {
 				  System.out.println(output);
 				  break;
 			  case "reviewer" : 
-				  currentUser = new Reviewer(id);
-				  System.out.println("Login successful. Status: Reviewer. Name: " + results.get(1).get(2) + " " + results.get(1).get(1));
+				  currentUser = null;
+ 				  String isActiveQuery = "SELECT REV_ISACTIVE FROM Reviewer WHERE Person_PERSON_ID = " + id + ";";
+				  ArrayList<ArrayList<String>> isActiveResults = Query.execute(isActiveQuery);
+				  if (isActiveResults.size() > 1 ){
+					  Boolean isActive = isActiveResults.get(1).get(0).compareTo("1") == 0;
+					  if (isActive){
+						  currentUser = new Reviewer(id);
+						  System.out.println("Login successful. Status: Reviewer. Name: " + results.get(1).get(2) + " " + results.get(1).get(1));
+					  } else {
+						  System.out.println("Reviewer is no longer active");
+					  }
+				  } else {
+					  System.out.println("SQL Error, cannot find user in reviewer table. Foreign key error");				   
+				  }
 				  break;
 			  default: 
 				System.out.println("Not a legitimate user type");
