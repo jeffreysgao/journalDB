@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Editor extends Person{
 	public Editor(int id){
 		super(id, "editor");
-		status();
+		loginStatus();
 	}
 
-	public void status(){
+	public void loginStatus(){
 		int submitted = 0, underReview = 0, rejected = 0, accepted = 0, typesetting = 0, scheduled = 0, published = 0;
 		
 		String submittedQuery = "SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 0;";
@@ -49,7 +49,7 @@ public class Editor extends Person{
 		return Integer.parseInt(results.get(1).get(0));
 	}
 	
-	public void getStatus() {
+	public void status() {
 		String manQuery = String.format("SELECT * FROM Manuscript ORDER BY MAN_STATUS, MAN_ID;" , this.id);
 		ArrayList<ArrayList<String>> results = Query.execute(manQuery);
 		if (results.size() < 2) {

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Reviewer extends Person {
 	public Reviewer(int id){
 		super(id, "reviewer");
-		status();
+		loginStatus();
 	}
 	
-	public void status() {
+	public void loginStatus() {
 		int submitted = 0, underReview = 0, rejected = 0, accepted = 0, typesetting = 0, scheduled = 0, published = 0;
 		
 		String revQuery = String.format("SELECT COUNT(*) FROM Assignment JOIN Manuscript ON Manuscript_MAN_ID = MAN_ID"
@@ -47,7 +47,7 @@ public class Reviewer extends Person {
 		System.out.println(result);
 	}
 	
-	public void getStatus() {
+	public void status() {
 		String manQuery = String.format("SELECT * FROM Manuscript WHERE MAN_ID IN"
 				+ " (SELECT Manuscript_MAN_ID FROM Assignment WHERE Reviewer_Person_PERSON_ID = %1$s) ORDER BY MAN_STATUS, MAN_ID;" , this.id);
 		ArrayList<ArrayList<String>> results = Query.execute(manQuery);

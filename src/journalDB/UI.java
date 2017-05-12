@@ -101,14 +101,13 @@ public class UI {
   public static void main (String[] args) throws IOException{
     
     //stack overflow answer
-	  
+	System.out.println("Enter a command");
     Scanner scanner = new Scanner(System.in);
     String readString = scanner.nextLine();
     ArrayList<String> input = deliminate(readString);
 
 
     while(readString!=null) {
-        System.out.println(readString);
        routeVerbs(input);
 
         if (readString.isEmpty()) {

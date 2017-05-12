@@ -71,7 +71,7 @@ public class dbexample {
 	  
 	  // get status
 	  System.out.println("TESTING EDITOR GETSTATUS: ");
-	  jameson.getStatus();
+	  jameson.status();
 	  System.out.println();
 	  
 	  System.out.println("INITIALIZING REVIEWER: ");
@@ -100,7 +100,7 @@ public class dbexample {
 	  // status
 	  System.out.println("TESTING STATUS:");
 	  dickens.status();
-	  jgao.status();
+	  jgao.loginStatus();
 	  System.out.println();
 	  
 	  // reject
@@ -130,7 +130,7 @@ public class dbexample {
 	  // status
 	  System.out.println("TESTING STATUS:");
 	  dickens.status();
-	  jgao.status();
+	  jgao.loginStatus();
 	  System.out.println();
 	  
 	  // typeset
@@ -143,7 +143,7 @@ public class dbexample {
 	  // status
 	  System.out.println("TESTING STATUS:");
 	  dickens.status();
-	  jgao.status();
+	  jgao.loginStatus();
 	  System.out.println();
 
 	  // schedule
@@ -171,7 +171,7 @@ public class dbexample {
 	  // status
 	  System.out.println("TESTING STATUS:");
 	  dickens.status();
-	  jgao.status();
+	  jgao.loginStatus();
 	  System.out.println();
 
 	  // publish
@@ -189,13 +189,13 @@ public class dbexample {
 	  // status
 	  System.out.println("TESTING STATUS:");
 	  dickens.status();
-	  jgao.status();
+	  jgao.loginStatus();
 	  System.out.println();
 
 	  // get status
 	  System.out.println("TESTING GET STATUS: ");
 	  Reviewer rev = new Reviewer(15);
-	  rev.getStatus();
+	  rev.status();
 	  System.out.println();
 	  
 	  // resignation
