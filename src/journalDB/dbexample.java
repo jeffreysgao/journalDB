@@ -23,7 +23,7 @@ public class dbexample {
 	  
 	  // test regAuthor
 	  System.out.println("TESTING REGAUTHOR:");
-	  People.regAuthor("jeff", "gao", "shung", "jeffrey.s.gao1", "13517 Moonflower Meadows Trail", "Dartmouth College");
+	  long authId = People.regAuthor("jeff", "gao", "shung", "jeffrey.s.gao1", "13517 Moonflower Meadows Trail", "Dartmouth College");
 	  System.out.println();
 	   
 //	  // test method for parsing tables
@@ -45,16 +45,37 @@ public class dbexample {
 	  System.out.println();
 	  
 	  /*
+	   * Author.java tests
+	   */
+	  Author dickens = new Author((int)authId);
+
+	  // submit
+	  System.out.println("TESTING SUBMIT");
+	  long manId = dickens.submit("A Tale of Two Cities", "UCL", 23, null, null);
+	  if (manId > 0)
+		  System.out.println("success\n");
+	  else
+		  System.out.println("fail\n");
+	  
+	  // status
+	  System.out.println("TESTING STATUS:");
+	  dickens.status();
+	  
+	  /*
 	   * Editor.java tests
 	   */
 	  Editor jameson = new Editor(50);
 	  
 	  // assign 
 	  System.out.println("TESTING ASSIGN: ");
-	  if (jameson.assign(3, (int)revId))
+	  if (jameson.assign((int)manId, (int)revId))
 		  System.out.println("success\n");
 	  else
 		  System.out.println("fail\n");
+	  
+	  // status
+	  System.out.println("TESTING STATUS:");
+	  dickens.status();
 	  
 	  // reject
 	  System.out.println("TESTING REJECT: ");
@@ -70,7 +91,7 @@ public class dbexample {
 	  
 	  // accept
 	  System.out.println("TESTING ACCEPT: ");
-	  if (jameson.accept(3))
+	  if (jameson.accept((int)manId))
 		  System.out.println("success\n");
 	  else
 		  System.out.println("fail\n");
@@ -80,26 +101,34 @@ public class dbexample {
 	  else
 		  System.out.println("fail\n");
 	  
+	  // status
+	  System.out.println("TESTING STATUS:");
+	  dickens.status();
+	  
 	  // typeset
 	  System.out.println("TESTING TYPESET: ");
-	  if (jameson.typeset(3, 24))
+	  if (jameson.typeset((int)manId, 24))
 		  System.out.println("success\n");
 	  else
 		  System.out.println("fail\n");
+	  
+	  // status
+	  System.out.println("TESTING STATUS:");
+	  dickens.status();
 	 
 	  // schedule
 	  System.out.println("TESTING SCHEDULE: ");
-	  if (jameson.schedule(3, 20))
+	  if (jameson.schedule((int)manId, 20))
 		  System.out.println("success\n");
 	  else
 		  System.out.println("fail\n");
 	  
-	  if (jameson.schedule(3, 20))
+	  if (jameson.schedule((int)manId, 20))
 		  System.out.println("success\n");
 	  else
 		  System.out.println("fail\n");
 	  
-	  if (jameson.schedule(3, 21))
+	  if (jameson.schedule((int)manId, 21))
 		  System.out.println("success\n");
 	  else	
 		  System.out.println("fail\n");
@@ -109,27 +138,20 @@ public class dbexample {
 	  else
 		  System.out.println("fail\n");
 	  
-	  // publish
-	  System.out.println("TESTING PUBLISH: ");
-	  if (jameson.publish(20))
-		  System.out.println("success\n");
-	  else 
-		  System.out.println("fail\n");
-	  
-	  /*
-	   * Author.java tests
-	   */
-	  Author dickens = new Author(1);
-
-	  // submit
-	  System.out.println("TESTING SUBMIT");
-	  if (dickens.submit("A Tale of Two Cities", "UCL", 23, null, null) > 0)
-		  System.out.println("success\n");
-	  else
-		  System.out.println("fail\n");
-	  
 	  // status
 	  System.out.println("TESTING STATUS:");
 	  dickens.status();
+	  
+	  // retract
+	  System.out.println("TESTING RETRACT: ");
+	  dickens.retract((int)manId);
+	  
+//	  // publish
+//	  System.out.println("TESTING PUBLISH: ");
+//	  if (jameson.publish(20))
+//		  System.out.println("success\n");
+//	  else 
+//		  System.out.println("fail\n");
+//	  
   }
 }

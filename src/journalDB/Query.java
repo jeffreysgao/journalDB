@@ -122,6 +122,8 @@ public class Query {
 
     		if (res > 0)
     			return id;
+    		else 
+    			return res;
     	    } catch (Exception e) { /* ignore cleanup errors */ }
     	}
     	return -1;
