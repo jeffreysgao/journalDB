@@ -74,6 +74,9 @@ public class UI {
 	  	case "resign" : 
 	  		currentUser.resign();
 	  		break;
+	  	case "create" : 
+	  		currentUser.create(input);
+	  		break;
 	  	default:
 	  		System.out.println("Please choose a valid command");
 	  }

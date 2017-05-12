@@ -14,9 +14,9 @@ public class Editor extends Person{
 	// Assign
 	public void assign(ArrayList<String> input){
 		if (Validation.validateDoubleIntegers(input)){
-			assign(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(2)));
+			assign(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)));
 		} else {
-			System.out.println("Please provide two options <manu#> and <reviewerId> such that they are both integers");
+			System.out.println("Please provide only two options <manu#> and <reviewerId> such that they are both integers");
 		}
 	}
 
@@ -44,7 +44,7 @@ public class Editor extends Person{
 		if (Validation.validateSingleInteger(input)) {
 			reject(Integer.parseInt(input.get(0)));
 		} else {
-			System.out.println("Please provide valid integer arugment");
+			System.out.println("Please provide one valid integer arugment");
 		}
 	}
 
@@ -189,6 +189,14 @@ public class Editor extends Person{
 	}
 	
 	// Publish
+	public void publish(ArrayList<String> input){
+		if (Validation.validateSingleInteger(input)){
+			publish(Integer.parseInt(input.get(0)));
+		} else {
+			System.out.println("Please provide a valid integer issue number");
+		}
+	}
+	
 	public boolean publish(int issue){
 		// Get all manuscripts for the issue
 		ArrayList<Integer> manIds = new ArrayList<Integer>();
@@ -216,15 +224,18 @@ public class Editor extends Person{
 		return true;
 	}
 
-	public void publish(ArrayList<String> input){
+	// Create (issue)
+	public void create(ArrayList<String> input){
 		if (Validation.validateDoubleIntegers(input)){
-			publish(Integer.parseInt(input.get(0)));
-		} else {
-			System.out.println("Please provide a valid integer issue number");
+			int period = Integer.parseInt(input.get(0));
+			int year = Integer.parseInt(input.get(1));
+			if (Validation.validateYear(year) && Validation.validatePeriod(period)){
+				//create(period, year);
+			} else {
+				System.out.println("Please center a valid period 1-4 and year 1970-2020");
+			}
 		}
 	}
-
-	// Create (issue)
 	public boolean create(int period, int year) {
 		// TODO: Implement this
 		return false;

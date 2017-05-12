@@ -14,6 +14,13 @@ public class Validation {
 		}
 	}
 
+	public static Boolean validatePeriod(int period){
+		return (period <= 4 && period >= 1);
+		
+	}
+	public static Boolean validateYear(int year){
+		return (year >= 1970 && year <= 2020);
+	}
 	
 	public static Boolean validateLength(ArrayList<String> arrayList, int size){
 		return  (arrayList.size() == size);

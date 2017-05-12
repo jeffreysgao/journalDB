@@ -28,6 +28,7 @@ public class Person {
 	public void typeset(ArrayList<String> input){ warning("typeset"); }
 	public void schedule(ArrayList<String> input){ warning("schedule"); }
 	public void publish(ArrayList<String> input){ warning("publish"); }
+	public void create(ArrayList<String> input){ warning("create"); }
 	
 	//reviewer verbs
 	public void resign(){ warning("resign");}
