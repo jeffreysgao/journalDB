@@ -64,7 +64,7 @@ public class BlandVerb {
 	}
 	
 	public static Person login(int id){
-		String query = "SELECT * FROM Person WHERE PERSON_ID = " + id;
+		String query = "SELECT PERSON_ID, PERSON_LNAME, PERSON_FNAME, PERSON_MNAME, PERSON_ROLE FROM Person WHERE PERSON_ID = " + id + ";";
 		ArrayList<ArrayList<String>> results = Query.execute(query);
 
 		if (results.size() > 1){
@@ -73,16 +73,22 @@ public class BlandVerb {
 			switch(personType){
 			  case "editor" : 
 				  currentUser = new Editor(id);
-				  System.out.println("Login successful. Status: Editor");
+				  System.out.println("Login successful. Status: Editor. Name: " + results.get(1).get(2) + " " + results.get(1).get(1));
 				  break;
 			  case "author" : 
 				  currentUser = new Author(id);
-				  System.out.println("Login successful. Status: Author");
+				  String output = "Login successful. Status: Author. Name: " + results.get(1).get(2) + " " + results.get(1).get(1);
+				  String aQuery = "SELECT AUTH_ADDR FROM Author WHERE Person_PERSON_ID = " + id + ";";
+				  ArrayList<ArrayList<String>> addr = Query.execute(aQuery);
+				  if (addr.size() != 2)
+					  System.out.println("Error getting author address");
+				  else 
+					  output += ". Address: " + addr.get(1).get(0);
+				  System.out.println(output);
 				  break;
-
 			  case "reviewer" : 
 				  currentUser = new Reviewer(id);
-				  System.out.println("Login successful. Status: Reviewer");
+				  System.out.println("Login successful. Status: Reviewer. Name: " + results.get(1).get(2) + " " + results.get(1).get(1));
 				  break;
 			  default: 
 				System.out.println("Not a legitimate user type");

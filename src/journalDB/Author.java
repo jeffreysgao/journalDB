@@ -61,7 +61,7 @@ public class Author extends Person {
 			RICode = Integer.parseInt(input.get(2));
 			switch(input.size()) {
 			case (3) : 
-				//submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
 				break;
 			case (4) :
 				//title affil RICode author2 author3 author4 filename
@@ -127,7 +127,14 @@ public class Author extends Person {
 			sQuery += ", null);";
 		else
 			sQuery += ", " + secondaryAuthors + ");";
-		return Query.insert(sQuery);
+		int id = Query.insert(sQuery);
+		if (id > 0) {
+			System.out.println("Successfully submitted manuscript id #" + id);
+		} else {
+			System.out.println("Could not submit");
+		}
+		
+		return id;
 	}
 
 	public void retract(ArrayList<String> input){
@@ -199,6 +206,7 @@ public class Author extends Person {
 			return false;
 		}
 		
+		System.out.println("Deleted manuscript id #" + manId);
 		return true;
 	}
 	
