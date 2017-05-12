@@ -1,7 +1,6 @@
 package journalDB;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +31,6 @@ public class UI {
 	        BlandVerb.register(role, input);
 	        break;
 	      case "login" :
-	    	int id = Integer.parseInt(input.get(0));
 	    	currentUser = BlandVerb.login(input);
 	    	break;
 	    	default : 
@@ -124,5 +122,6 @@ public class UI {
             readString = null;
         }
     }
+    scanner.close();
   }
 }

@@ -70,6 +70,7 @@ public class Reviewer extends Person {
 	public boolean resignation(){
 		String query = "UPDATE `Reviewer` SET REV_ISACTIVE = false WHERE Person_PERSON_ID = " + this.id;
 		// value returned should be > 0 if at least one row is updated
+		System.out.println("Thank you for your service");
 		return Query.insert(query) >= 0;
 	}
 	
