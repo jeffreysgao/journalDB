@@ -7,22 +7,25 @@ public class BlandVerb {
 	
 	public static void register (String role, ArrayList<String> input){
 	    switch(role) {
-	      case "reviwer" :
+	      case "reviewer" :
 	        //fname,. lname, mname, affil, email, ricodes as ArrayListInteger
 	        ArrayList<Integer> RICodes = new ArrayList<Integer>();
 	        switch(input.size()) {
 	          case (5) :
 	            RICodes.add(Integer.parseInt(input.get(4)));
 	            People.regReviewer(input.get(0), input.get(1), null, input.get(2), input.get(3), RICodes);
+	            break;
 	          case (6) :
 	            RICodes.add(Integer.parseInt(input.get(4)));
 	            RICodes.add(Integer.parseInt(input.get(5)));
 	            People.regReviewer(input.get(0), input.get(1), null, input.get(2), input.get(3), RICodes);
+	            break;
 	          case (7) :
 	            RICodes.add(Integer.parseInt(input.get(4)));
 	            RICodes.add(Integer.parseInt(input.get(5)));
 	            RICodes.add(Integer.parseInt(input.get(6)));
 	            People.regReviewer(input.get(0), input.get(1), null, input.get(2), input.get(3), RICodes);
+	            break;
 
 	          default :
 	            System.out.println("Please enter the proper number of arugments");

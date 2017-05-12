@@ -29,7 +29,8 @@ public class People {
 					if (Query.insert(rcQuery) < 0)
 						System.out.println("Inserting " + ricode + " for " + id + " into ricodes failed");
 				}
-
+				
+				System.out.println("Reviewer id #" + id + " registered");
 				return id;
 			}
 		}
@@ -46,14 +47,19 @@ public class People {
 			if (affil != null && !affil.isEmpty())
 				aQuery += String.format(", \"%1$s\"", affil);
 			aQuery += ");";
-			if (Query.insert(aQuery) >= 0)
+			if (Query.insert(aQuery) >= 0) {
+				System.out.println("Author id #" + id + " registered");
 				return id;
+			}
 		}
 		return -1;
 	}
 
 	public static long regEditor(String fname, String lname, String mname) {
-		return regPerson(fname, lname, mname, EDITOR);
+		int id = (int)regPerson(fname, lname, mname, EDITOR);
+		if (id > 0) 
+			System.out.println("Editor id #" + id + " registered");
+		return id;
 	}
 
 	private static long regPerson(String fname, String lname, String mname, int role) {

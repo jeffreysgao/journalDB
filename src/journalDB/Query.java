@@ -65,11 +65,11 @@ public class Query {
     		stmt.close();
     		res.close();
 //    		System.out.println("Connection terminated.\n");
-    		return results;
+
     	    } catch (Exception e) { /* ignore cleanup errors */ }
     	}
-    	return null;
-    }
+		return results;
+	}
 
     /*
      * Used for queries that update tables, true indicates successfully changing 1+ rows
@@ -120,12 +120,12 @@ public class Query {
     		stmt.close();
 //    		System.out.println("Connection terminated.\n");
 
-    		if (res > 0)
-    			return id;
-    		else 
-    			return res;
+
     	    } catch (Exception e) { /* ignore cleanup errors */ }
     	}
-    	return -1;
+		if (res > 0)
+			return id;
+		else 
+			return res;
     }
 }
