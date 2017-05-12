@@ -73,20 +73,25 @@ public class Reviewer extends Person {
 		return Query.insert(query) >= 0;
 	}
 	
-	public void review(Boolean isAccepted, ArrayList<String> input){
+	public void review(ArrayList<String> input){
 		try {
-			int manId = Integer.parseInt(input.get(0));
-			int appr = Integer.parseInt(input.get(1));
-			int clar = Integer.parseInt(input.get(2));
-			int meth = Integer.parseInt(input.get(3));
-			int contr = Integer.parseInt(input.get(4));
-			if ( Validation.validateRatings(appr, clar, meth, contr)){
+			Boolean isAccepted = null;
+			if(input.get(0).compareTo("yes") == 0) {
+				isAccepted = true;
+			} else if (input.get(0).compareTo("no") == 0){
+				isAccepted = false;
+			}
+			int manId = Integer.parseInt(input.get(1));
+			int appr = Integer.parseInt(input.get(2));
+			int clar = Integer.parseInt(input.get(3));
+			int meth = Integer.parseInt(input.get(4));
+			int contr = Integer.parseInt(input.get(5));
+			if ( Validation.validateRatings(appr, clar, meth, contr) && isAccepted != null){
 				review(isAccepted, manId, appr, clar, meth, contr);
 			} else { 
-				System.out.println("Ratings can only be between 1-10");
+				System.out.println("Ratings can only be between 1-10 and recommendation must either be yes or no");
 			}
 		} catch(Exception e ){
-			System.out.println(input);
 			System.out.println("Please give proper type and number of arguments");
 		}
 	}

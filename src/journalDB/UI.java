@@ -28,6 +28,7 @@ public class UI {
 		 switch(verb) {
 	      case "register" :
 	        String role = input.get(0);
+	        input.remove(0);
 	        BlandVerb.register(role, input);
 	        break;
 
@@ -74,9 +75,13 @@ public class UI {
 	  	case "resign" : 
 	  		currentUser.resign();
 	  		break;
+	  	case "review" : 
+	  		currentUser.review(input);
+	  		break;
 	  	case "create" : 
 	  		currentUser.create(input);
 	  		break;
+
 	  	default:
 	  		System.out.println("Please choose a valid command");
 	  }

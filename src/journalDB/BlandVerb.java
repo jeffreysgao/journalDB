@@ -30,9 +30,8 @@ public class BlandVerb {
 	        break;
 
 	      case "author" :
-	    	 //regAuthor(String fname, String lname, String mname, String email, String address, String affil) {
 	        if(Validation.validateLength(input, 4)){
-	          People.regAuthor(input.get(0), input.get(1), null, input.get(2), input.get(3), input.get(4));
+	          People.regAuthor(input.get(0), input.get(1), null, input.get(2), input.get(3), null);
 	        } else {
 	          System.out.println("Please enter the proper number of arguments");
 	        }

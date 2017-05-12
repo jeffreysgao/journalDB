@@ -32,7 +32,7 @@ public class Person {
 	
 	//reviewer verbs
 	public void resign(){ warning("resign");}
-	public void review(Boolean isAccepted, ArrayList<String> input){ warning("review"); }
+	public void review(ArrayList<String> input){ warning("review"); }
 
 	
 	public String getClassName(){
