@@ -1,10 +1,11 @@
 package journalDB;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Author extends Person {
 	public Author(int id){
-		super(id, "reviewer");
+		super(id, "author");
 		status();
 	}
 
@@ -55,24 +56,55 @@ public class Author extends Person {
 	public void submit(ArrayList<String> input){
 		int RICode = -1;
 		String secondaryAuthors = null;
+		String filename = null;
 		try {
 			RICode = Integer.parseInt(input.get(2));
 			switch(input.size()) {
+			case (3) : 
+				//submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				break;
 			case (4) :
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(3));
-				System.out.println("RICode is not an integer");
+				//title affil RICode author2 author3 author4 filename
+				if (Validation.validateAuthorFormat(input.get(3))){
+					secondaryAuthors = Util.formatSecondaryAuthors(input.get(3));
+					submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				} else { 
+					submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(3));		
+				}
 				break;
 			case(5) :
-				secondaryAuthors = input.get(3);
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(4));
+				if (Validation.validateAuthorFormat(input.get(3)) && Validation.validateAuthorFormat(input.get(4))){
+					secondaryAuthors = Util.formatSecondaryAuthors(input.get(3), input.get(4));
+					submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				} else if (Validation.validateAuthorFormat(input.get(3))){
+					secondaryAuthors = Util.formatSecondaryAuthors(input.get(3));
+					filename = input.get(4);
+					submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				} else { 
+					//error
+					System.out.println("Please format your author names correctly such that \"<lastName>, <firstName>\"");
+				}
 				break;
 			case(6) :
-				secondaryAuthors = input.get(3) + input.get(4);
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(5));
+				if (Validation.validateAuthorFormat(input.get(3)) && Validation.validateAuthorFormat(input.get(4)) && Validation.validateAuthorFormat(input.get(5))){
+					secondaryAuthors = Util.formatSecondaryAuthors(input.get(3), input.get(4), input.get(5));
+					submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				} else if (Validation.validateAuthorFormat(input.get(3)) && Validation.validateAuthorFormat(input.get(4))){
+					secondaryAuthors = Util.formatSecondaryAuthors(input.get(3), input.get(4));
+					filename = input.get(5);
+					submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				} else {
+					System.out.println("Please format your author names correctly such that \"<lastName>, <firstName>\"");
+				}
 				break;
 			case(7) :
-				secondaryAuthors = input.get(3) + input.get(4) + input.get(5);
-				submit(input.get(0), input.get(1), RICode, secondaryAuthors, input.get(6));
+				if (Validation.validateAuthorFormat(input.get(3)) && Validation.validateAuthorFormat(input.get(4)) && Validation.validateAuthorFormat(input.get(5))){
+					secondaryAuthors = Util.formatSecondaryAuthors(input.get(3), input.get(4), input.get(5));
+					filename = input.get(6);
+					submit(input.get(0), input.get(1), RICode, secondaryAuthors, filename);
+				} else {
+					System.out.println("Please format your author names correctly such that \"<lastName>, <firstName>\"");
+				}
 				break;
 			default :
 				System.out.println("Please enter the proper number of arguments");
@@ -99,8 +131,37 @@ public class Author extends Person {
 	}
 
 	public void retract(ArrayList<String> input){
-		try {
-			retract(Integer.parseInt(input.get(1)));
+		try { 
+			int id = Integer.parseInt(input.get(0));
+			System.out.println("Are you sure? y/n");
+			Scanner scanner = new Scanner(System.in);
+			String readString = scanner.nextLine();
+
+			Boolean flag = true;
+			while (flag){
+				if (readString.compareTo("y") == 0 || readString.compareTo("yes") == 0 || readString.compareTo("Y") == 0){
+					flag = false;
+					System.out.println("Retracting manuscript");
+					retract(id);
+					break;
+				} else if (readString.compareTo("n") == 0 || readString.compareTo("no") == 0 || readString.compareTo("N") == 0){
+					flag = false;
+					System.out.println("Cancelling retraction");
+					break;
+				} else {
+					flag = true;
+				}
+				
+		        if (readString.isEmpty()) {
+		            System.out.println("");
+		        }
+		        if (scanner.hasNextLine()) {
+		            readString = scanner.nextLine();
+		        } else {
+		            readString = null;
+		        }
+			}
+			scanner.close();
 		} catch (Exception e ){
 			System.out.println("Please provide the proper number of arguments to retract manuscript");
 		}

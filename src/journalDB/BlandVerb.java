@@ -53,40 +53,47 @@ public class BlandVerb {
 	    }
 	  }
 
-	public static void login(ArrayList<String> input){
+	public static Person login(ArrayList<String> input){
 		if (Validation.validateSingleInteger(input)){
 			int id = Integer.parseInt(input.get(0));
-			login(id);
+			return login(id);
 		} else { 
 			System.out.println("Login Id must be an integer");
+			return null;
 		}
 	}
 	
 	public static Person login(int id){
-		Person currentUser = new Person(0, "");
 		String query = "SELECT * FROM Person WHERE PERSON_ID = " + id;
 		ArrayList<ArrayList<String>> results = Query.execute(query);
 
 		if (results.size() > 1){
+			Person currentUser;
 			String personType = results.get(1).get(4);
 			switch(personType){
 			  case "editor" : 
 				  currentUser = new Editor(id);
+				  System.out.println("Login successful. Status: Editor");
 				  break;
 			  case "author" : 
 				  currentUser = new Author(id);
+				  System.out.println("Login successful. Status: Author");
 				  break;
+
 			  case "reviewer" : 
 				  currentUser = new Reviewer(id);
+				  System.out.println("Login successful. Status: Reviewer");
 				  break;
 			  default: 
 				System.out.println("Not a legitimate user type");
+				currentUser = null;
 				break;
 			 }
+			return currentUser;
 		} else { 
 			System.out.println("ID does not exist in system");
+			return null;
 		}
-		return currentUser;
 	}
 }
 
