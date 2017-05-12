@@ -5,10 +5,67 @@ import java.util.ArrayList;
 public class Editor extends Person{
 	public Editor(int id){
 		super(id, "editor");
+		status();
 	}
 
 	public void status(){
-		System.out.println("Editor status");
+		int submitted = 0, underReview = 0, rejected = 0, accepted = 0, typesetting = 0, scheduled = 0, published = 0;
+		
+		String submittedQuery = "SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 0;";
+		if (getCount(submittedQuery) >= 0)
+			submitted = getCount(submittedQuery);
+		String revQuery = "SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 2;";
+		if (getCount(revQuery) >= 0)
+			underReview = getCount(revQuery);
+		String rejQuery = "SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 1;";
+		if (getCount(rejQuery) >= 0)
+			rejected = getCount(rejQuery);
+		String accQuery = "SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 3 AND MAN_ID NOT IN (SELECT Manuscript_MAN_ID FROM Scheduling) AND MAN_NUMPAGES IS NULL;";
+		if (getCount(accQuery) >= 0)
+			accepted = getCount(accQuery);
+		String typeQuery ="SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 3 AND MAN_ID NOT IN (SELECT Manuscript_MAN_ID FROM Scheduling) AND MAN_NUMPAGES IS NOT NULL;";
+		if (getCount(typeQuery) >= 0)
+			typesetting = getCount(typeQuery);
+		String schedQuery = "SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 3 AND MAN_ID IN (SELECT Manuscript_MAN_ID FROM Scheduling);";
+		if (getCount(schedQuery) >= 0)
+			scheduled = getCount(schedQuery);
+		String pubQuery = "SELECT COUNT(*) FROM Manuscript WHERE MAN_STATUS = 4;";
+		if (getCount(pubQuery) >= 0)
+			published = getCount(pubQuery);
+		
+		String result = String.format("%1$s submitted, %2$s under review, %3$s rejected, %4$s accepted, %5$s typesetting, %6$s scheduled, %7$s published", 
+				submitted, underReview, rejected, accepted, typesetting, scheduled, published);
+		
+		//produces a report of all the
+		//manuscripts currently in the system r
+		System.out.println(result);
+	}
+	
+	private int getCount(String query) {
+		ArrayList<ArrayList<String>> results = Query.execute(query);
+		if (results.size() != 2 || results.get(1).size() != 1) 
+			return -1;
+		
+		return Integer.parseInt(results.get(1).get(0));
+	}
+	
+	public void getStatus() {
+		String manQuery = String.format("SELECT * FROM Manuscript ORDER BY MAN_STATUS, MAN_ID;" , this.id);
+		ArrayList<ArrayList<String>> results = Query.execute(manQuery);
+		if (results.size() < 2) {
+			System.out.println("Error getting assigned manuscripts");
+			return;
+		} else {
+			System.out.println("ALL MANUSCRIPTS: ");
+		}
+		
+		for (int i = 1; i < results.size(); i++) {
+			String row = "\t" + i + ". ";
+			for (int j = 0; j < results.get(0).size(); j++) {
+				row += String.format("%1$s: %2$s\t", results.get(0).get(j), results.get(i).get(j));
+			}
+			System.out.println(row);
+		}
 	}
 
 	// Assign
