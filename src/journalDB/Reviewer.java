@@ -14,7 +14,7 @@ public class Reviewer extends Person {
 	
 	public void resign(){
 		String query = "UPDATE `Reviewer` SET REV_ISACTIVE = false WHERE Person_PERSON_ID = " + this.id;
-		Query.execute(query);
+		Query.insert(query);
 	}
 	
 	public void review(Boolean isAccepted, ArrayList<String> input){
@@ -36,7 +36,7 @@ public class Reviewer extends Person {
 	}
 
 	private void review(Boolean isAccepted, int manId, int appr, int clar, int meth, int contr){	
-		int intAccepted = isAccepted ? 1 : 0;
+		int intAccepted = isAccepted ? 1 : 0; //1 is accepted, 0 not accepted
 		String query = "INSERT INTO Rating (Assignment_Reviewer_Person_PERSON_ID, Assignment_Manuscript_MAN_ID, RATING_APPR, RATING_CLAR, RATING_METH, RATING_CONTR, RATING_REC) " + 
 				"VALUES (" + this.id + ", " + manId + ", " + appr + ", " + clar + ", " + meth + ", " + contr + ", " + intAccepted +");";
 		System.out.println(query);

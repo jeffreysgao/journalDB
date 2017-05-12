@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class BlandVerb {
 	
-	public static void verbRegister (String role, ArrayList<String> input){
+	public static void register (String role, ArrayList<String> input){
 	    switch(role) {
 	      case "reviwer" :
 	        //fname,. lname, mname, affil, email, ricodes as ArrayListInteger
@@ -53,12 +53,56 @@ public class BlandVerb {
 	    }
 	  }
 
-	
-
-
-	public static String verbLogin(int id){
-		return "hello";
+	public static void login(ArrayList<String> input){
+		if (Validation.validateSingleInteger(input)){
+			int id = Integer.parseInt(input.get(0));
+			login(id);
+		} else { 
+			System.out.println("Login Id must be an integer");
+		}
 	}
+	
+	public static Person login(int id){
+		Person currentUser = new Person(1, "1");
+		System.out.println
+		String query = "SELECT * FROM Person WHERE PERSON_ID = " + id;
+		
+		ArrayList<ArrayList<String>> results = Query.execute(query);
+		/*
+		if (results.size() > 1){
+			results.get(1);
+			System.out.println("ID does not exist in system");
+		} else { 
+			System.out.println("ID does not exist in system");
+		}
+		results.size();
+		*/
+		System.out.println(results);
+		return currentUser;
+	}
+	/*
+	private static Person setPerson(int id){
+		 switch(person) {
+		  case "editor" : 
+			  currentUser = new Editor(id);
+			  query = query + " = \"editor\" and PERSON_ID = " + id;
+			  System.out.println("Bland verb " + query);
+			  Query.execute(query);
+			  break;
+			  
+		  case "author" : 
+			  currentUser = new Author(id);
+			  break;
+		  case "reviewer" : 
+			  currentUser = new Reviewer(id);
+			  break;
+		  default: 
+			System.out.println("Not a legitimate login user type");
+			break;
+		  }
+		  return currentUser;
+	}
+*/
 	
 	public static void verbResign(){
 		

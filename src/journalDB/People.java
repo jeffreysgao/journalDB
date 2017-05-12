@@ -68,17 +68,15 @@ public class People {
 				pQuery += ", \"author\");";
 				break;
 			case EDITOR:
-				pQuery += ", \"editor\"";
+				pQuery += ", \"editor\");";
 				break;
 			case REVIEWER:
-				pQuery += ", \"reviewer\"";
+				pQuery += ", \"reviewer\");";
 				break;
 			default:
 				return -1;
 		}
 
-		pQuery += ");";
-		System.out.println(pQuery);
 		return Query.insert(pQuery);
 	}
 }

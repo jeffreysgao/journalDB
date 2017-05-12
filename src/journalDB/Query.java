@@ -29,7 +29,7 @@ public class Query {
     	    // initialize connection
     	    con = DriverManager.getConnection(SERVER+DATABASE, USERNAME, PASSWORD);
 
-    	    System.out.println("Connection established.");
+//    	    System.out.println("Connection established.");
 
     	    // initialize a query statement
     	    stmt = con.createStatement();
@@ -64,7 +64,7 @@ public class Query {
     		con.close();
     		stmt.close();
     		res.close();
-    		System.out.println("\nConnection terminated.");
+//    		System.out.println("Connection terminated.\n");
     		return results;
     	    } catch (Exception e) { /* ignore cleanup errors */ }
     	}
@@ -92,7 +92,7 @@ public class Query {
     	    // initialize connection
     	    con = DriverManager.getConnection(SERVER+DATABASE, USERNAME, PASSWORD);
 
-    	    System.out.println("Connection established.");
+//    	    System.out.println("Connection established.");
 
     	    // initialize a query statement
     	    stmt = con.createStatement();
@@ -105,8 +105,6 @@ public class Query {
     	    	id = rs.getInt(1);
     	    rs.close();
     	    
-    	    System.out.println(Integer.toString(id));
-
     	    System.out.format("Query executed: '%s'\n", q);
 
     	} catch (SQLException e ) {          // catch SQL errors
@@ -120,7 +118,7 @@ public class Query {
     	    try {
     		con.close();
     		stmt.close();
-    		System.out.println("\nConnection terminated.");
+//    		System.out.println("Connection terminated.\n");
 
     		if (res > 0)
     			return id;
