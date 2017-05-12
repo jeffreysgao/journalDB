@@ -46,7 +46,7 @@ public class People {
 			if (affil != null && !affil.isEmpty())
 				aQuery += String.format(", \"%1$s\"", affil);
 			aQuery += ");";
-			if (Query.insert(aQuery) > 0)
+			if (Query.insert(aQuery) >= 0)
 				return id;
 		}
 		return -1;

@@ -106,7 +106,59 @@ public class Author extends Person {
 		}
 	}
 	
-	public void retract(int manID){
+	public boolean retract(int manId){
+		// check if a manuscript is published yet
+		int[] statuses = {4};
+		if (checkStatus(statuses, manId)) {
+			System.out.println("Manuscript has already been published");
+			return false;
+		}
 		
+		// if it hasn't been published, remove it from the database
+		String dQuery = String.format("DELETE FROM Scheduling WHERE Manuscript_MAN_ID = %1$s;", manId);
+		if (Query.insert(dQuery) < 0) {
+			System.out.println("Error unscheduling manuscript");
+			return false;
+		}
+		String rQuery = String.format("DELETE FROM Rating WHERE Assignment_Manuscript_MAN_ID = %1$s;", manId);
+		int result = Query.insert(rQuery);
+		if (result < 0) {
+			System.out.println(result + "");
+			System.out.println("Error deleting ratings for manuscript");
+			return false;
+		}
+		String aQuery = String.format("DELETE FROM Assignment WHERE Manuscript_MAN_ID = %1$s;", manId);
+		if (Query.insert(aQuery) < 0) {
+			System.out.println("Error deleting assignments for manuscript");
+			return false;
+		}
+		String mQuery = String.format("DELETE FROM Manuscript WHERE MAN_ID = %1$s;", manId);
+		if (Query.insert(mQuery) < 0) {
+			System.out.println("Error deleting manuscript");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	// Helper method to check if statuses are in a given set
+	private boolean checkStatus(int[] statuses, int manuNum) {
+		String statusQuery = String.format("SELECT MAN_STATUS FROM Manuscript WHERE MAN_ID = %1$s;", manuNum);
+		ArrayList<ArrayList<String>> results = Query.execute(statusQuery);
+		if (results != null && results.size() == 2 && results.get(0).size() == 1) {
+			if (results.get(0).get(0).equals("MAN_STATUS")) {
+				for (int i = 0; i < statuses.length; i++) {
+					if (Integer.parseInt(results.get(1).get(0)) == statuses[i])
+						return true;
+				}
+			} else {
+				System.out.println("Error in getting the status of manuscript " + manuNum);
+				return false;
+			}
+		} else {
+			System.out.println("Error in getting the status of manuscript " + manuNum);
+			return false;
+		}
+		return false;
 	}
 }

@@ -22,9 +22,16 @@ public class Editor extends Person{
 
 	public boolean assign(int manuNum, int revId){
 		// Check if the manuscript is assignable
-		int[] statuses = {2};
+		int[] statuses = {0, 2};
 		if (!checkStatus(statuses, manuNum))
 			return false;
+		
+		// Make sure that the manuscript is under review
+		String sQuery = String.format("UPDATE Manuscript SET MAN_STATUS = 2 WHERE MAN_ID = %1$s;", manuNum);
+		if (Query.insert(sQuery) < 0) {
+			System.out.println("Error updating manuscript status");
+			return false;
+		}
 
 		// Insert assignment
 		String assnQuery = String.format("INSERT INTO Assignment (Manuscript_MAN_ID, Reviewer_Person_PERSON_ID, ASSIGN_DATE) "
@@ -217,6 +224,12 @@ public class Editor extends Person{
 		}
 	}
 
+	// Create (issue)
+	public boolean create(int period, int year) {
+		// TODO: Implement this
+		return false;
+	}
+	
 	// Helper method to check if statuses are in a given set
 	private boolean checkStatus(int[] statuses, int manuNum) {
 		String statusQuery = String.format("SELECT MAN_STATUS FROM Manuscript WHERE MAN_ID = %1$s;", manuNum);
