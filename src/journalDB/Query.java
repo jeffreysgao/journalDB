@@ -37,7 +37,7 @@ public class Query {
     	    // query db and save results
     	    res = stmt.executeQuery(q);
 
-    	    System.out.format("Query executed: '%s'\n", q);
+//    	    System.out.format("Query executed: '%s'\n", q);
     	    
     	    numColumns = res.getMetaData().getColumnCount();
     	    
@@ -105,7 +105,7 @@ public class Query {
     	    	id = rs.getInt(1);
     	    rs.close();
     	    
-    	    System.out.format("Query executed: '%s'\n", q);
+//    	    System.out.format("Query executed: '%s'\n", q);
 
     	} catch (SQLException e ) {          // catch SQL errors
     	    System.err.format("SQL Error: %s", e.getMessage());

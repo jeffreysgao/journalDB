@@ -175,7 +175,7 @@ public class Editor extends Person{
 	// Schedule
 	public void schedule(ArrayList<String> input){
 		if (Validation.validateDoubleIntegers(input)){
-			typeset(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)));
+			schedule(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)));
 		} else {
 			System.out.println("Please provide a valid integer <manu#> and issue number");
 		}
@@ -314,7 +314,7 @@ public class Editor extends Person{
 		}
 	}
 	public boolean create(int period, int year) {
-		String iQuery = String.format("INSERT INTO ISSUE (ISS_PER, ISS_YEAR) VALUES (%1$s, %2$s);", period, year);
+		String iQuery = String.format("INSERT INTO Issue (ISS_PER, ISS_YEAR) VALUES (%1$s, %2$s);", period, year);
 		int id = Query.insert(iQuery);
 		if (id > 0) {
 			System.out.println("Created issue #" + id);

@@ -70,7 +70,7 @@ public class UI {
 	  		currentUser.publish(input);
 	  		break;
 	  	case "resign" : 
-	  		currentUser.resign();
+	  		currentUser.resignation();
 	  		break;
 	  	case "review" : 
 	  		currentUser.review(input);

@@ -67,11 +67,15 @@ public class Reviewer extends Person {
 		}
 	}
 	
-	public boolean resignation(){
+	public void resignation(){
 		String query = "UPDATE `Reviewer` SET REV_ISACTIVE = false WHERE Person_PERSON_ID = " + this.id;
 		// value returned should be > 0 if at least one row is updated
 		System.out.println("Thank you for your service");
-		return Query.insert(query) >= 0;
+		if (Query.insert(query) >= 0) {
+			System.out.println("You have been successfully resigned");
+		} else {
+			System.out.println("Error resigning");
+		}
 	}
 	
 	public void review(ArrayList<String> input){
@@ -116,7 +120,11 @@ public class Reviewer extends Person {
 		int intAccepted = isAccepted ? 1 : 0; //1 is accepted, 0 not accepted
 		String query = "INSERT INTO Rating (Assignment_Reviewer_Person_PERSON_ID, Assignment_Manuscript_MAN_ID, RATING_APPR, RATING_CLAR, RATING_METH, RATING_CONTR, RATING_REC) " + 
 				"VALUES (" + this.id + ", " + manId + ", " + appr + ", " + clar + ", " + meth + ", " + contr + ", " + intAccepted +");";
-		return Query.insert(query) >= 0;
+		if (Query.insert(query) >= 0) {
+			System.out.println("Submitted review for manuscript #" + manId);
+			return true;
+		}
+		return false;
 	}	
 	
 	private int getCount(String query) {

@@ -31,7 +31,7 @@ public class Person {
 	public void create(ArrayList<String> input){ warning("create"); }
 	
 	//reviewer verbs
-	public void resign(){ warning("resign");}
+	public void resignation(){ warning("resign");}
 	public void review(ArrayList<String> input){ warning("review"); }
 
 	

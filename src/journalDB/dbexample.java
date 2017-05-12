@@ -200,9 +200,6 @@ public class dbexample {
 	  
 	  // resignation
 	  System.out.println("TESTING RESIGNATION: ");
-	  if (jgao.resignation())
-		  System.out.println("success");
-	  else 
-		  System.out.println("failure");
+	  jgao.resignation();
   }
 }
