@@ -63,49 +63,30 @@ public class BlandVerb {
 	}
 	
 	public static Person login(int id){
-		Person currentUser = new Person(1, "1");
-		System.out.println
+		Person currentUser = new Person(0, "");
 		String query = "SELECT * FROM Person WHERE PERSON_ID = " + id;
-		
 		ArrayList<ArrayList<String>> results = Query.execute(query);
-		/*
+
 		if (results.size() > 1){
-			results.get(1);
-			System.out.println("ID does not exist in system");
+			String personType = results.get(1).get(4);
+			switch(personType){
+			  case "editor" : 
+				  currentUser = new Editor(id);
+				  break;
+			  case "author" : 
+				  currentUser = new Author(id);
+				  break;
+			  case "reviewer" : 
+				  currentUser = new Reviewer(id);
+				  break;
+			  default: 
+				System.out.println("Not a legitimate user type");
+				break;
+			 }
 		} else { 
 			System.out.println("ID does not exist in system");
 		}
-		results.size();
-		*/
-		System.out.println(results);
 		return currentUser;
-	}
-	/*
-	private static Person setPerson(int id){
-		 switch(person) {
-		  case "editor" : 
-			  currentUser = new Editor(id);
-			  query = query + " = \"editor\" and PERSON_ID = " + id;
-			  System.out.println("Bland verb " + query);
-			  Query.execute(query);
-			  break;
-			  
-		  case "author" : 
-			  currentUser = new Author(id);
-			  break;
-		  case "reviewer" : 
-			  currentUser = new Reviewer(id);
-			  break;
-		  default: 
-			System.out.println("Not a legitimate login user type");
-			break;
-		  }
-		  return currentUser;
-	}
-*/
-	
-	public static void verbResign(){
-		
 	}
 }
 

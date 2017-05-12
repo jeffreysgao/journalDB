@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Person { 
 	protected int id;
-	private String className;
+	protected String className;
 	public Person(int id, String className){
 		this.id = id;
 		this.className = "";

@@ -102,7 +102,7 @@ public class UI {
     ArrayList<String> input = new ArrayList<String>(Arrays.asList(singleInput.split(" ")));
     
     */
-    BlandVerb.login(1);
+    currentUser = BlandVerb.login(1);
 
     //routeVerbs(input);
   }
