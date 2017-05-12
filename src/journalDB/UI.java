@@ -31,7 +31,6 @@ public class UI {
 	        input.remove(0);
 	        BlandVerb.register(role, input);
 	        break;
-
 	      case "login" :
 	    	int id = Integer.parseInt(input.get(0));
 	    	currentUser = BlandVerb.login(input);
@@ -110,7 +109,6 @@ public class UI {
     Scanner scanner = new Scanner(System.in);
     String readString = scanner.nextLine();
     ArrayList<String> input = deliminate(readString);
-
 
     while(readString!=null) {
        routeVerbs(input);
