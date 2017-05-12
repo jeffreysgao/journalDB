@@ -1,6 +1,7 @@
 package journalDB;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Author extends Person {
 	public Author(int id){
@@ -130,8 +131,37 @@ public class Author extends Person {
 	}
 
 	public void retract(ArrayList<String> input){
-		try {
-			retract(Integer.parseInt(input.get(1)));
+		try { 
+			int id = Integer.parseInt(input.get(0));
+			System.out.println("Are you sure? y/n");
+			Scanner scanner = new Scanner(System.in);
+			String readString = scanner.nextLine();
+
+			Boolean flag = true;
+			while (flag){
+				if (readString.compareTo("y") == 0 || readString.compareTo("yes") == 0 || readString.compareTo("Y") == 0){
+					flag = false;
+					System.out.println("Retracting manuscript");
+					retract(id);
+					break;
+				} else if (readString.compareTo("n") == 0 || readString.compareTo("no") == 0 || readString.compareTo("N") == 0){
+					flag = false;
+					System.out.println("Cancelling retraction");
+					break;
+				} else {
+					flag = true;
+				}
+				
+		        if (readString.isEmpty()) {
+		            System.out.println("");
+		        }
+		        if (scanner.hasNextLine()) {
+		            readString = scanner.nextLine();
+		        } else {
+		            readString = null;
+		        }
+			}
+			scanner.close();
 		} catch (Exception e ){
 			System.out.println("Please provide the proper number of arguments to retract manuscript");
 		}
