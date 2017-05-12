@@ -168,7 +168,6 @@ public class Author extends Person {
 		            readString = null;
 		        }
 			}
-			scanner.close();
 		} catch (Exception e ){
 			System.out.println("Please provide the proper number of arguments to retract manuscript");
 		}
