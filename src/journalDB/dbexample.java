@@ -115,5 +115,21 @@ public class dbexample {
 		  System.out.println("success\n");
 	  else 
 		  System.out.println("fail\n");
+	  
+	  /*
+	   * Author.java tests
+	   */
+	  Author dickens = new Author(1);
+
+	  // submit
+	  System.out.println("TESTING SUBMIT");
+	  if (dickens.submit("A Tale of Two Cities", "UCL", 23, null, null) > 0)
+		  System.out.println("success\n");
+	  else
+		  System.out.println("fail\n");
+	  
+	  // status
+	  System.out.println("TESTING STATUS:");
+	  dickens.status();
   }
 }
