@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class BlandVerb {
 	
-	public static void verbRegister (String role, ArrayList<String> input){
+	public static void register (String role, ArrayList<String> input){
 	    switch(role) {
 	      case "reviwer" :
 	        //fname,. lname, mname, affil, email, ricodes as ArrayListInteger
@@ -53,15 +53,40 @@ public class BlandVerb {
 	    }
 	  }
 
-	
-
-
-	public static String verbLogin(int id){
-		return "hello";
+	public static void login(ArrayList<String> input){
+		if (Validation.validateSingleInteger(input)){
+			int id = Integer.parseInt(input.get(0));
+			login(id);
+		} else { 
+			System.out.println("Login Id must be an integer");
+		}
 	}
 	
-	public static void verbResign(){
-		
+	public static Person login(int id){
+		Person currentUser = new Person(0, "");
+		String query = "SELECT * FROM Person WHERE PERSON_ID = " + id;
+		ArrayList<ArrayList<String>> results = Query.execute(query);
+
+		if (results.size() > 1){
+			String personType = results.get(1).get(4);
+			switch(personType){
+			  case "editor" : 
+				  currentUser = new Editor(id);
+				  break;
+			  case "author" : 
+				  currentUser = new Author(id);
+				  break;
+			  case "reviewer" : 
+				  currentUser = new Reviewer(id);
+				  break;
+			  default: 
+				System.out.println("Not a legitimate user type");
+				break;
+			 }
+		} else { 
+			System.out.println("ID does not exist in system");
+		}
+		return currentUser;
 	}
 }
 

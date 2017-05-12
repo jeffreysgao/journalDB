@@ -8,9 +8,10 @@ import com.mysql.fabric.xmlrpc.base.Array;
 
 public class UI {
 	private static Person currentUser;
-  public UI() throws IOException {}
 
+	
   private static void login(int id, String person){
+	  String query; 
 	  switch(person) {
 	  case "editor" : 
 		  currentUser = new Editor(id);
@@ -23,7 +24,7 @@ public class UI {
 		  currentUser = new Reviewer(id);
 		  break;
 	  default: 
-		System.out.println("Not a legitimate login id");
+		System.out.println("Not a legitimate login user type");
 		break;
 	  }
   }
@@ -44,12 +45,12 @@ public class UI {
 		 switch(verb) {
 	      case "register" :
 	        String role = input.get(0);
-	        BlandVerb.verbRegister(role, input);
+	        BlandVerb.register(role, input);
 	        break;
 
 	      case "login" :
 	    	int id = Integer.parseInt(input.get(0));
-	    	login(id, BlandVerb.verbLogin(id));
+	    	BlandVerb.login(input);
 	    	break;
 		  }
 	  } else {System.out.println("Not enough arugments were provided");}
@@ -60,19 +61,15 @@ public class UI {
 	  	case "status" :
 	  		currentUser.status(input);
 	  		break;
-
 	  	case "submit" :
 	  		currentUser.submit(input);
 	  		break;
-
 	  	case "retract" :
 	  		currentUser.retract(input);
 	  		break;
-	  	
 	  	case "assign" : 
 	  		currentUser.assign(input);
 	  		break;
-	  		
 	  	case "reject" : 
 	  		currentUser.reject(input);
 	  		break;
@@ -89,9 +86,8 @@ public class UI {
 	  		currentUser.publish(input);
 	  		break;
 	  	case "resign" : 
-	  		currentUser.resign(input);
+	  		currentUser.resign();
 	  		break;
-
 	  	default:
 	  		System.out.println("Please choose a valid command");
 	  }
@@ -99,35 +95,15 @@ public class UI {
  
 
   public static void main (String[] args) throws IOException{
+	  /*
     Scanner scan = new Scanner(System.in);
     String singleInput = scan.nextLine();
-
     System.out.println(singleInput);
-    int i = Integer.parseInt("1");
-    System.out.println(i);
-    int a =0, b =0, c= 0, d = 0;
-    int sum = 0;
-    try {
-    	ArrayList<Integer> jon = new ArrayList<Integer>();
-    	jon.add(1);
-    	jon.add(2);
-    	jon.add(3);
-    	sum = sum + jon.get(0);
-    	sum = sum + jon.get(1);
-    	sum = sum + jon.get(2);
-    	sum = sum +jon.get(3);
-
-    } catch( Exception e){
-
-    	System.out.println("haha");
-    	System.out.println(sum);
-
-    }
     ArrayList<String> input = new ArrayList<String>(Arrays.asList(singleInput.split(" ")));
+    
+    */
+    currentUser = BlandVerb.login(1);
 
     //routeVerbs(input);
-    
-
-
   }
 }

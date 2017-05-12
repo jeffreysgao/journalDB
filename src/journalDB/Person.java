@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Person { 
 	protected int id;
-	private String className;
+	protected String className;
 	public Person(int id, String className){
 		this.id = id;
 		this.className = "";
@@ -34,7 +34,8 @@ public class Person {
 	public void publish(ArrayList<String> input){ warning("publish"); }
 	
 	//reviewer verbs
-	public void resign(ArrayList<String> input){ warning("resign");}
+	public void resign(){ warning("resign");}
+	public void review(Boolean isAccepted, ArrayList<String> input){ warning("review"); }
 
 	
 	public String getClassName(){
