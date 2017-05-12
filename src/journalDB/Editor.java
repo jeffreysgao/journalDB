@@ -93,7 +93,11 @@ public class Editor extends Person{
 		// Insert assignment
 		String assnQuery = String.format("INSERT INTO Assignment (Manuscript_MAN_ID, Reviewer_Person_PERSON_ID, ASSIGN_DATE) "
 				+ "VALUES (%1$s, %2$s, NOW());", manuNum, revId);
-		return Query.insert(assnQuery) >= 0;
+		if (Query.insert(assnQuery) >= 0) {
+			System.out.println("Assigned manuscript #" + manuNum + " to reviewer #" + revId);
+			return true;
+		}
+		return false;
 	}
 
 	// Reject
@@ -113,7 +117,11 @@ public class Editor extends Person{
 
 		// Reject manuscript
 		String rQuery = String.format("UPDATE Manuscript SET MAN_STATUS = 1, MAN_LASTUPDATED = NOW() WHERE MAN_ID = %1$s;", manuNum);
-		return Query.insert(rQuery) >= 0;
+		if (Query.insert(rQuery) >= 0) {
+			System.out.println("Rejected manuscript #" + manuNum);
+			return true;
+		}
+		return false;
 	}
 
 	// Accept
@@ -133,7 +141,11 @@ public class Editor extends Person{
 
 		// Accept manuscript
 		String accQuery = String.format("UPDATE Manuscript SET MAN_STATUS = 3, MAN_LASTUPDATED = NOW() WHERE MAN_ID = %1$s;", manuNum);
-		return Query.insert(accQuery) >= 0;
+		if (Query.insert(accQuery) >= 0) {
+			System.out.println("Accepted manuscript #" + manuNum);
+			return true;
+		} 
+		return false;
 	}
 
 	// Typeset
@@ -153,7 +165,11 @@ public class Editor extends Person{
 
 		// Typeset manuscript
 		String tQuery = String.format("UPDATE Manuscript SET MAN_NUMPAGES = %1$s WHERE MAN_ID = %2$s;", numPages, manuNum);
-		return Query.insert(tQuery) >= 0;
+		if (Query.insert(tQuery) >= 0) {
+			System.out.println("Typeset manuscript #" + manuNum);
+			return true;
+		}
+		return false;
 	}
 
 	// Schedule
@@ -241,8 +257,11 @@ public class Editor extends Person{
 		// Schedule manuscript for issue
 		String sQuery = String.format("INSERT INTO Scheduling (Issue_ISS_ID, Manuscript_MAN_ID, PAGENO, ORDERING)"
 				+ " VALUES (%1$s, %2$s, %3$s, %4$s);", issue, manuNum, pageNo, order);
-
-		return Query.insert(sQuery) >= 0;
+		if (Query.insert(sQuery) >= 0) {
+			System.out.println("Scheduled manuscript #" + manuNum + " to issue #" + issue);
+			return true;
+		}
+		return false;
 	}
 	
 	// Publish
@@ -278,6 +297,7 @@ public class Editor extends Person{
 				System.out.println("Error in updating status of manuscript " + manuNum);
 		}
 		
+		System.out.println("Published issue #" + issue);
 		return true;
 	}
 
@@ -287,13 +307,19 @@ public class Editor extends Person{
 			int period = Integer.parseInt(input.get(0));
 			int year = Integer.parseInt(input.get(1));
 			if (Validation.validateYear(year) && Validation.validatePeriod(period)){
-				//create(period, year);
+				create(period, year);
 			} else {
 				System.out.println("Please center a valid period 1-4 and year 1970-2020");
 			}
 		}
 	}
 	public boolean create(int period, int year) {
+		String iQuery = String.format("INSERT INTO ISSUE (ISS_PER, ISS_YEAR) VALUES (%1$s, %2$s);", period, year);
+		int id = Query.insert(iQuery);
+		if (id > 0) {
+			System.out.println("Created issue #" + id);
+			return true;
+		}
 		// TODO: Implement this
 		return false;
 	}

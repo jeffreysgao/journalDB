@@ -174,6 +174,13 @@ public class Author extends Person {
 	}
 	
 	public boolean retract(int manId){
+		// check if a manuscript is assigned to this author
+		String cQuery = String.format("SELECT COUNT(*) FROM Manuscript WHERE MAN_ID = %1$s AND Author_Person_PERSON_ID = %2$s;", manId, this.id);
+		if (getCount(cQuery) != 1) {
+			System.out.println("You are not the author of this manuscript");
+			return false;
+		} 
+		
 		// check if a manuscript is published yet
 		int[] statuses = {4};
 		if (checkStatus(statuses, manId)) {
