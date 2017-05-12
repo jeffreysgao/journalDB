@@ -5,9 +5,15 @@ import java.util.ArrayList;
 public class Validation {
 	public Validation(){}
 	
-	public static Boolean validateRole(){
-		return true;
+	public static Boolean validateAuthorFormat(String author){
+		String[] splitName = author.split(",");
+		if (splitName.length == 2){
+			return true;
+		} else {
+			return false;
+		}
 	}
+
 	
 	public static Boolean validateLength(ArrayList<String> arrayList, int size){
 		return  (arrayList.size() == size);
