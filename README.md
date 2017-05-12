@@ -1,6 +1,7 @@
 # journalDB
 # journalDB
 
+java -Xmx100m journalDB.UI
 -1 means insert failed
 0 means successful no new key created
 1 or greater is the key

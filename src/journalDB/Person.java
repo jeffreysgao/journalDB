@@ -7,19 +7,15 @@ public class Person {
 	protected String className;
 	public Person(int id, String className){
 		this.id = id;
-		this.className = "";
+		this.className = className;
 	}
 	
 	private void warning(String verb){
 		System.out.println("You do not have the access rights to " + verb);
 	}
 	
-	public void status(){
-		System.out.println("foo");
-	}
-
 	//all roles
-	public void status(ArrayList<String> input){ warning("status"); }
+	public void status(){ warning("status"); }
 	
 	//author verbs
 	public void submit(ArrayList<String> input) { warning("submit");}

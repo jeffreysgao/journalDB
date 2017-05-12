@@ -4,37 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 public class UI {
 	private static Person currentUser;
 
-	
-  private static void login(int id, String person){
-	  String query; 
-	  switch(person) {
-	  case "editor" : 
-		  currentUser = new Editor(id);
-		  break;
-		  
-	  case "author" : 
-		  currentUser = new Author(id);
-		  break;
-	  case "reviewer" : 
-		  currentUser = new Reviewer(id);
-		  break;
-	  default: 
-		System.out.println("Not a legitimate login user type");
-		break;
-	  }
-  }
 
   private static void routeVerbs(ArrayList<String> input){
 	  if (currentUser != null && Validation.validateLength(input,1)){
 		  String verb = input.get(0);
 		  userVerbs(verb, input);
-	  } else if (Validation.validateLength(input, 1)){
+	  } else if (Validation.lengthAtLeast(input, 1)){
 		  String verb = input.get(0);
+		  input.remove(0);
 		  blandVerbs(verb, input);
 	  } else {
 		  System.out.println("Please enter a command");
@@ -50,8 +30,11 @@ public class UI {
 
 	      case "login" :
 	    	int id = Integer.parseInt(input.get(0));
-	    	BlandVerb.login(input);
+	    	currentUser = BlandVerb.login(input);
 	    	break;
+	    	default : 
+	    		System.out.println("Not a valid command");
+	    		break;
 		  }
 	  } else {System.out.println("Not enough arugments were provided");}
  }
@@ -59,7 +42,7 @@ public class UI {
   private static void userVerbs(String verb, ArrayList<String> input){
 	  switch(verb) {
 	  	case "status" :
-	  		currentUser.status(input);
+	  		currentUser.status();
 	  		break;
 	  	case "submit" :
 	  		currentUser.submit(input);
@@ -95,15 +78,32 @@ public class UI {
  
 
   public static void main (String[] args) throws IOException{
-	  /*
-    Scanner scan = new Scanner(System.in);
+	System.out.println(args);
+    //What i need to save
+    /*
     String singleInput = scan.nextLine();
-    System.out.println(singleInput);
     ArrayList<String> input = new ArrayList<String>(Arrays.asList(singleInput.split(" ")));
-    
+    routeVerbs(input);
     */
-    currentUser = BlandVerb.login(1);
+    
+    //stack overflow answer
+    Scanner scanner = new Scanner(System.in);
+    String readString = scanner.nextLine();
+    ArrayList<String> input = new ArrayList<String>(Arrays.asList(readString.split(" ")));
+    while(readString!=null) {
+        System.out.println(readString);
+       routeVerbs(input);
 
-    //routeVerbs(input);
+        if (readString.isEmpty()) {
+            System.out.println("");
+        }
+
+        if (scanner.hasNextLine()) {
+            readString = scanner.nextLine();
+            input = new ArrayList<String>(Arrays.asList(readString.split(" ")));
+        } else {
+            readString = null;
+        }
+    }
   }
 }

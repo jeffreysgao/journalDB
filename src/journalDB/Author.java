@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Author extends Person {
 	public Author(int id){
-		super(id, "reviewer");
+		super(id, "author");
 		status();
 	}
 
