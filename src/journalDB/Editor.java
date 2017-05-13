@@ -187,10 +187,24 @@ public class Editor extends Person{
 		if (!checkStatus(statuses, manuNum))
 			return false;
 
+		// Check if manuscript has been typeset
+		String tQuery = String.format("SELECT COUNT(*) FROM Manuscript WHERE MAN_ID = %1$s AND MAN_NUMPAGES IS NOT NULL;", manuNum);
+		ArrayList<ArrayList<String>> results = Query.execute(tQuery);
+		if (results != null && results.size() == 2 && results.get(0).size() == 1) {
+			if (results.get(0).get(0).equals("COUNT(*)")) {
+				if (Integer.parseInt(results.get(1).get(0)) != 1) {
+					System.out.println("Manuscript does not exist or has not been typeset");
+					return false;
+				}
+			}
+		} else {
+			System.out.println("Error checking if manuscript exists and is typeset");
+			return false;
+		}
 
 		// Check if issue exists
 		String iQuery = String.format("SELECT COUNT(*) FROM Issue WHERE ISS_ID = %1$s;", issue);
-		ArrayList<ArrayList<String>> results = Query.execute(iQuery);
+		results = Query.execute(iQuery);
 		if (results != null && results.size() == 2 && results.get(0).size() == 1) {
 			if (results.get(0).get(0).equals("COUNT(*)")) {
 				if (Integer.parseInt(results.get(1).get(0)) != 1) {

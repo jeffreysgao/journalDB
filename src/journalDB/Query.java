@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public class Query {
 
 	public static final String SERVER   = "jdbc:mysql://sunapee.cs.dartmouth.edu/";
-    public static final String USERNAME = "salee";
-    public static final String PASSWORD = "sleeslee";
-    public static final String DATABASE = "salee_db";
+    public static final String USERNAME = "gbsnlspl";
+    public static final String PASSWORD = "dbTimespring2017!";
+    public static final String DATABASE = "gbsnlspl_db";
 
     /*
      * Used for queries that get tables, true indicates success
